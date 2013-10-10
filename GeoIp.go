@@ -10,17 +10,17 @@ import (
 )
 
 type Ip struct {
-	Ip          string `json:"ip,omitempty"`
-	CountryCode string `json:"country_code,omitempty"`
-	CountryName string `json:"country_name,omitempty"`
-	RegionCode  string `json:"region_code,omitempty"`
-	RegionName  string `json:"region_name,omitempty"`
-	City        string `json:"city,omitempty"`
-	Zipcode     string `json:"zipcode,omitempty"`
-	Latitude    string `json:"latitude,omitempty"`
-	Longitude   string `json:"longitude,omitempty"`
-	MetroCode   string `json:"metro_code,omitempty"`
-	Areacode    string `json:"areacode,omitempty"`
+	Ip          string  `json:"ip,omitempty"`
+	CountryCode string  `json:"country_code,omitempty"`
+	CountryName string  `json:"country_name,omitempty"`
+	RegionCode  string  `json:"region_code,omitempty"`
+	RegionName  string  `json:"region_name,omitempty"`
+	City        string  `json:"city,omitempty"`
+	Zipcode     string  `json:"zipcode,omitempty"`
+	Latitude    float32 `json:"latitude,omitempty"`
+	Longitude   float32 `json:"longitude,omitempty"`
+	MetroCode   string  `json:"metro_code,omitempty"`
+	Areacode    string  `json:"areacode,omitempty"`
 }
 
 // Fetch makes the call to freegeoip to search
