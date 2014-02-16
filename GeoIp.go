@@ -9,8 +9,8 @@ import (
 	"net/http"
 )
 
-type Ip struct {
-	Ip          string  `json:"ip,omitempty"`
+type ip struct {
+	IP          string  `json:"ip,omitempty"`
 	CountryCode string  `json:"country_code,omitempty"`
 	CountryName string  `json:"country_name,omitempty"`
 	RegionCode  string  `json:"region_code,omitempty"`
@@ -24,8 +24,8 @@ type Ip struct {
 }
 
 // Fetch makes the call to freegeoip to search
-// for the provided IP Address
-func Fetch(ip string) (Ip, error) {
+// for the provided ip Address
+func Fetch(ip string) (ip, error) {
 	resp, err := http.Get("http://freegeoip.net/json/" + ip)
 	if err != nil {
 		return Ip{}, err
@@ -35,9 +35,9 @@ func Fetch(ip string) (Ip, error) {
 
 	switch resp.StatusCode {
 	case 403:
-		return Ip{}, errors.New("Freegeoip hourly limit reached")
+		return Ip{}, errors.New("freegeoip hourly limit reached")
 	case 404:
-		return Ip{}, errors.New("Invalid IP Address, or Not Found")
+		return Ip{}, errors.New("invalid ip Address, or not found")
 	default:
 	}
 
