@@ -25,30 +25,30 @@ type ip struct {
 
 // Fetch makes the call to freegeoip to search
 // for the provided ip Address
-func Fetch(ip string) (ip, error) {
-	resp, err := http.Get("http://freegeoip.net/json/" + ip)
+func Fetch(query string) (ip, error) {
+	resp, err := http.Get("http://freegeoip.net/json/" + query)
 	if err != nil {
-		return Ip{}, err
+		return ip{}, err
 	}
 
 	defer resp.Body.Close()
 
 	switch resp.StatusCode {
 	case 403:
-		return Ip{}, errors.New("freegeoip hourly limit reached")
+		return ip{}, errors.New("freegeoip hourly limit reached")
 	case 404:
-		return Ip{}, errors.New("invalid ip Address, or not found")
+		return ip{}, errors.New("invalid ip Address, or not found")
 	default:
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return Ip{}, err
+		return ip{}, err
 	}
-	var response Ip
+	var response ip
 	err = json.Unmarshal(body, &response)
 	if err != nil {
-		return Ip{}, err
+		return ip{}, err
 	}
 
 	return response, nil
