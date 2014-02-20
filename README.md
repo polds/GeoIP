@@ -39,3 +39,7 @@ or likewise you can run the GoConvey web UI to run the tests
 ## [Notes](https://github.com/polds/GeoIP#notes)
  - As of February 19, 2014 this library is considered complete. No additional features will be added. Should a Go version change require any changes to the library it will be updated. Please be aware this is not an abandoned project but is used on a daily basis.
  - This library has been run through golint. 
+
+
+
+ Any feature requets, comments, concerns are welcome: [@Peter_Olds](https://twitter.com/Peter_Olds)
