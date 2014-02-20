@@ -24,3 +24,18 @@ GeoIP is a [FreeGeoIP](https://github.com/fiorix/freegeoip) API abstraction libr
 		fmt.Println(info.City)
 		fmt.Println(info.CountryCode)
 	}
+
+## [Tests](https://github.com/polds/GeoIP#tests)
+
+[GoConvey](http://smartystreets.github.io/goconvey/) is used in this library for testing. Testing can be done two different ways:
+
+    go test -v
+
+or likewise you can run the GoConvey web UI to run the tests
+
+    goconvey .
+
+
+## [Notes](https://github.com/polds/GeoIP#notes)
+ - As of February 19, 2014 this library is considered complete. No additional features will be added. Should a Go version change require any changes to the library it will be updated. Please be aware this is not an abandoned project but is used on a daily basis.
+ - This library has been run through golint. 
