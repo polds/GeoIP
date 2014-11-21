@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-type ip struct {
+type Ip struct {
 	IP          string  `json:"ip,omitempty"`
 	CountryCode string  `json:"country_code,omitempty"`
 	CountryName string  `json:"country_name,omitempty"`
@@ -17,39 +17,35 @@ type ip struct {
 	RegionName  string  `json:"region_name,omitempty"`
 	City        string  `json:"city,omitempty"`
 	Zipcode     string  `json:"zipcode,omitempty"`
+	TimeZone    string  `json:"time_zone,omitempty"`
 	Latitude    float32 `json:"latitude,omitempty"`
 	Longitude   float32 `json:"longitude,omitempty"`
-	MetroCode   string  `json:"metro_code,omitempty"`
-	Areacode    string  `json:"areacode,omitempty"`
+	MetroCode   int     `json:"metro_code,omitempty"`
 }
 
 // Fetch makes the call to freegeoip to search
 // for the provided ip Address
-func Fetch(query string) (ip, error) {
+func Fetch(query string) (Ip, error) {
+	var response Ip
+
 	resp, err := http.Get("http://freegeoip.net/json/" + query)
 	if err != nil {
-		return ip{}, err
+		return response, err
 	}
-
 	defer resp.Body.Close()
 
 	switch resp.StatusCode {
 	case 403:
-		return ip{}, errors.New("freegeoip hourly limit reached")
+		return response, errors.New("freegeoip hourly limit reached")
 	case 404:
-		return ip{}, errors.New("invalid ip Address, or not found")
+		return response, errors.New("invalid ip Address, or not found")
 	default:
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return ip{}, err
+		return response, err
 	}
-	var response ip
 	err = json.Unmarshal(body, &response)
-	if err != nil {
-		return ip{}, err
-	}
-
-	return response, nil
+	return response, err
 }
